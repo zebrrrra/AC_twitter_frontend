@@ -7,6 +7,7 @@ import { ReactComponent as Avatar } from '../../assets/icon/img.svg'
 import style from './TweetCard.module.scss';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { useNavigate } from 'react-router-dom';
 
 dayjs.extend(relativeTime);
 dayjs.locale('zh-tw');
@@ -22,11 +23,20 @@ function getTime(createdAt) {
 }
 
 
-const TweetCard = ({ tweet }) => {
+const TweetCard = ({ tweet, userId }) => {
     //if(!tweet){
-      //  return null;}
+    //  return null;}
+    const navigate = useNavigate();
+
+    const handleAvatarClick = () => {
+        navigate(`/profile/${userId}`);
+
+
+    };
+
+
     const {
-        User: { name, account,avatar } = {},
+        User: { name, account, avatar } = {},
         description,
         repliesCount,
         likesCount,
@@ -35,30 +45,30 @@ const TweetCard = ({ tweet }) => {
     } = tweet;
 
 
-            return (
-                  <div className={style.tweetCardContainer}>
-                    <div className={style.tweetCard}>
-                    <img src={avatar} className={style.avatar} alt="avatar"/>
-                        <div className={style.contentContainer}>
-                            <div className={style.nameAndUserId}>
-                                <span className={style.name}>{name}</span>
-                                <span className={style.userIdTime}>@{account}・{getTime(createdAt)}</span>
-                            </div>
+    return (
+        <div className={style.tweetCardContainer}>
+            <div className={style.tweetCard}>
+                <img src={avatar} className={style.avatar} alt="avatar" onClick={handleAvatarClick} />
+                <div className={style.contentContainer}>
+                    <div className={style.nameAndUserId}>
+                        <span className={style.name}>{name}</span>
+                        <span className={style.userIdTime}>@{account}・{getTime(createdAt)}</span>
+                    </div>
 
-                            <div className={style.tweet}>
-                                {description}
-                            </div>
-                            <div className={style.countContainer}>
-                                <div className={style.count}>
-                                    <img src={replyIcon} alt="reply" />{repliesCount}</div>
-                                <div className={style.count}>
-                                    <img src={isCurrentUserLiked?isLikeIcon:likeIcon} alt="like" />{likesCount}
-                                </div>
-                            </div>
+                    <div className={style.tweet}>
+                        {description}
+                    </div>
+                    <div className={style.countContainer}>
+                        <div className={style.count}>
+                            <img src={replyIcon} alt="reply" />{repliesCount}</div>
+                        <div className={style.count}>
+                            <img src={isCurrentUserLiked ? isLikeIcon : likeIcon} alt="like" />{likesCount}
                         </div>
                     </div>
+                </div>
+            </div>
         </div>)
-        };
+};
 
 export default TweetCard;
 
@@ -68,56 +78,56 @@ export default TweetCard;
 
    // return (
         //<div className={style.tweetCardContainer}>
-          /*第一組
-          <div className={style.tweetCard}>
-                <div className={style.avatar}> <Avatar/></div>
-                <div className={style.contentContainer}>
-                <div className={style.nameAndUserId}>
-                    <span className={style.name}>John Doe</span>
-                    <span className={style.userIdTime}>@heyjohn・3小時</span>
-                </div>
-            
-            <div className={style.tweet}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
-                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-            <div className={style.countContainer}>
-                <div className={style.count}>
-                    <img src= {replyIcon} alt="reply"/>13</div>
-                    <div className={style.count}>
-                    <img src= {likeIcon} alt="like"/>76
-                </div>
-            </div>
-            </div>
-             第一組結尾
-             </div>
-             /*第二組reply
-             <div className={style.tweetCard}>
-            <div className={style.avatar}> <Avatar/></div>
-                <div className={style.contentContainer}>
-                <div className={style.nameAndUserId}>
-                    <span className={style.name}>John Doe</span>
-                    <span className={style.userIdTime}>@heyjohn・3小時</span>
-                </div>
-                <div className={style.replyContainer}>
-                    <div className={style.reply}>回覆</div>
-                    <div className={style.replyId}>@apple</div> </div>
-            <div className={style.tweet}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
-                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-            
-            </div>
-            </div>
-            /*第二組結尾
-        </div>
-    );
+/*第一組
+<div className={style.tweetCard}>
+      <div className={style.avatar}> <Avatar/></div>
+      <div className={style.contentContainer}>
+      <div className={style.nameAndUserId}>
+          <span className={style.name}>John Doe</span>
+          <span className={style.userIdTime}>@heyjohn・3小時</span>
+      </div>
+  
+  <div className={style.tweet}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
+      irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </div>
+  <div className={style.countContainer}>
+      <div className={style.count}>
+          <img src= {replyIcon} alt="reply"/>13</div>
+          <div className={style.count}>
+          <img src= {likeIcon} alt="like"/>76
+      </div>
+  </div>
+  </div>
+   第一組結尾
+   </div>
+   /*第二組reply
+   <div className={style.tweetCard}>
+  <div className={style.avatar}> <Avatar/></div>
+      <div className={style.contentContainer}>
+      <div className={style.nameAndUserId}>
+          <span className={style.name}>John Doe</span>
+          <span className={style.userIdTime}>@heyjohn・3小時</span>
+      </div>
+      <div className={style.replyContainer}>
+          <div className={style.reply}>回覆</div>
+          <div className={style.replyId}>@apple</div> </div>
+  <div className={style.tweet}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
+      irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </div>
+  
+  </div>
+  </div>
+  /*第二組結尾
+</div>
+);
 }
 export default TweetCard;*/
 

@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import TweetCard from '../TweetCard/TweetCard';
 import { getUserTweets } from '../../apis/user';
 
-const TweetList =({ userId })=>{
+const TweetList = ({ userId }) => {
     const [tweets, setTweets] = useState([]);
 
-    useEffect(()=>{
+    useEffect(() => {
         const fetchTweets = async () => {
             const data = await getUserTweets(userId);
             console.log(data); //測試
@@ -15,9 +15,9 @@ const TweetList =({ userId })=>{
             }
         }
         fetchTweets();
-    },[userId]); 
+    }, [userId]);
 
-    return tweets.map(tweet => <TweetCard key={tweet.id} tweet={tweet} type="tweet"/>)
+    return tweets.map(tweet => <TweetCard key={tweet.id} tweet={tweet} userId={userId} type="tweet" />)
 }
 
 export default TweetList;

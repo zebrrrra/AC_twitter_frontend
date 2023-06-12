@@ -1,18 +1,15 @@
-//import { useAuth } from '';
-//import { useEffect } from 'react;
-//import { useNavigate } from 'react-router-dom';
 import RecommendList from '../../components/RecommendList/RecommendList';
 import Navbar from '../../components/Navbars/Navbars';
 import Header from '../../components/Headers/Headers';
 import Main from '../../components/Main/Main';
-import style from './ProfilePage.module.scss'
+import style from "./OtherProfilePage.module.scss"
 import AuthContext from '../../context/AuthContext'
-import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useContext } from 'react';
+//import { useParmas } from 'react-router-dom';
 
-const ProfilePage = () => {
-  const { id } = useParams();
+const OtherProfilePage = () => {
+
   //const {userId } = useParams();
   /*不確定Router*/
   //const { isAuthenticated } =useAuth ();
@@ -41,7 +38,7 @@ const ProfilePage = () => {
         </div>
         <div className={style.middleColumn}>
           <Header />
-          <Main userId={id} />
+          <Main />
         </div>
         <div className={style.rightColumn}>
           <RecommendList />
@@ -51,4 +48,4 @@ const ProfilePage = () => {
   )
 }
 
-export default ProfilePage;
+export default OtherProfilePage;

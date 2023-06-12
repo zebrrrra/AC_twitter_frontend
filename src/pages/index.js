@@ -5,4 +5,5 @@ import HomePage from "./HomePage/HomePage";
 import ProfilePage from "./ProfilePage/ProfilePage";
 // import HomePage from "./HomePage/HomePage";
 import SettingPage from "./SettingPage/SettingPage";
-export { HomePage, ProfilePage, LoginPage, AdminLoginPage, RegisterPage, SettingPage }
+import OtherProfilePage from "./OtherProfilePage/OtherProfilePage";
+export { HomePage, ProfilePage, LoginPage, AdminLoginPage, RegisterPage, SettingPage, OtherProfilePage }

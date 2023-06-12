@@ -1,14 +1,26 @@
 import UserInfo from '../UserInfo/UserInfo'
 import Tab from '../Tab/Tab';
-import {useParams} from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-const Main = () => {
-  const { id } = useParams();
-  const {user} = useAuth();
-   return (
+import TweetList from '../TweetList/TweetList';
+const Main = ({ userId }) => {
+  // const { id } = useParams();
+  const { user } = useAuth();
+
+
+
+  useEffect(() => {
+    console.log('params id:', userId); // params id: 123
+  }, []);
+
+
+
+  return (
     <>
-    <UserInfo userId={id}/>
-    <Tab userId={user && user.id}/>
+      <UserInfo userId={userId} />
+      <Tab userId={user && user.id} />
+      <TweetList userId={userId} />
     </>
   )
 

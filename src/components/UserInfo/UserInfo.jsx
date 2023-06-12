@@ -5,17 +5,24 @@ import { Link } from "react-router-dom"
 import EditModal from "../EditModal/EditModal"
 import { useState } from "react"
 import { getUsers } from "../../apis/user"
+import { useParams } from "react-router-dom"
+
+
 
 const UserInfo = ({ img = background }) => {
+
+  const { id } = useParams();
   const [openModal, setOpenModal] = useState(false);
-  // 使用個變數作為判斷是否為別人 點擊頭
+  // 使用個變數作為判斷是否為別人 
 
   const handleClick = async () => {
     setOpenModal(true)
-    // id透過jwt解析token獲得
+    // id透過jwt解析token獲得去和路由抓到的id做比較，是使用者本人編輯按鈕/別人鈴鐺按鈕,useEffect[每當id改變去做判斷]
+
 
     // 發送api載入自己的資料
-    // const payload = await getUsers(id)
+    const payload = await getUsers(id)
+
   }
   return (
     <div className={style.container}>
