@@ -1,16 +1,18 @@
 import style from './MainPost.module.scss';
 import { useState } from 'react';
 import { postTweets } from '../../apis/tweet';
+import { useNavigate } from 'react-router-dom';
 import { async } from 'q';
 
 const MainPost= ( {user} ) => {
     const [tweetText, setTweetText] =useState ('');
-  
+  const navigate = useNavigate();
     const handleSubmit =async () => {
         const data = await postTweets(tweetText);
         console.log(data);//測試
         setTweetText('');//傳完回到空值
-        window.location.reload();//直接刷新頁面
+        //window.location.reload('/');//直接刷新頁面
+        navigate ('/main');
     }
     if(!user){
         return null;//可以改成加載loading
