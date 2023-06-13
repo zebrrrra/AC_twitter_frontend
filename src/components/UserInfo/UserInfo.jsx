@@ -6,24 +6,29 @@ import EditModal from "../EditModal/EditModal"
 import { useState } from "react"
 import { getUsers } from "../../apis/user"
 import { useParams } from "react-router-dom"
+import { useEffect } from "react"
+import { useAuth } from "../../context/AuthContext"
 
 
-
-const UserInfo = ({ img = background }) => {
-
-  const { id } = useParams();
+const UserInfo = ({ img = background, useId }) => {
   const [openModal, setOpenModal] = useState(false);
   // 使用個變數作為判斷是否為別人 
+  const { user, payload, setPayload } = useAuth()
 
-  const handleClick = async () => {
+
+  const handleOpenClick = async () => {
     setOpenModal(true)
-    // id透過jwt解析token獲得去和路由抓到的id做比較，是使用者本人編輯按鈕/別人鈴鐺按鈕,useEffect[每當id改變去做判斷]
-
 
     // 發送api載入自己的資料
-    const payload = await getUsers(id)
-
+    const id = user.id
+    console.log(id)
+    const userData = await getUsers(id)
+    console.log(userData)
+    setPayload(userData)
   }
+  // useEffect(() => {
+  //   console.log('params id:', userId); // params id: 123
+  // }, []);
   return (
     <div className={style.container}>
       <div className={style.bgContainer}>
@@ -33,19 +38,18 @@ const UserInfo = ({ img = background }) => {
         <img src={avatar} alt="avatar" />
       </div>
       <div className={style.buttonContainer}>
-        <button className={style.button} type="button" onClick={handleClick}>編輯個人資料</button>
+        <button className={style.button} type="button" onClick={handleOpenClick}>編輯個人資料</button>
       </div>
       <div className={style.textContainer}>
-        <h5 className={style.name}>hkjhuhuh</h5>
-        <span className={style.account}>@hkjhuhuh</span>
-        <p>每次角度傍晚時畢竟⋯自己很認家的綠以為我這樣⋯的生的原因大概也信任，了沒多久能抱歉我。
-        </p>
+        <h5 className={style.name}>"qq"</h5>
+        <span className={style.account}>@"sss"</span>
+        <p>"qq"</p>
         <div className={style.linkGroup}>
           <Link to="" className={style.link}>321個<span>跟隨中</span></Link>
           <Link to="" className={style.link}>31個<span>跟隨者</span></Link>
         </div>
       </div>
-      {openModal && <EditModal open={openModal} onClose={(value) => setOpenModal(value)} />}
+      {openModal && <EditModal payload={payload} open={openModal} onClose={(value) => setOpenModal(value)} />}
     </div >
 
   )

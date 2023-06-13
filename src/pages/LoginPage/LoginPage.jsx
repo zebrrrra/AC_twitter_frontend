@@ -37,7 +37,7 @@ const LoginPage = () => {
         position: 'top',
       });
       setResponseError(false)
-      navigate('/') //wait to solve 
+      navigate('/*') //wait to solve 
       return
     }
 

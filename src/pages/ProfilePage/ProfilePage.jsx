@@ -10,12 +10,13 @@ import AuthContext from '../../context/AuthContext'
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useContext } from 'react';
+import { useAuth } from '../../context/AuthContext';
 
 const ProfilePage = () => {
   const { id } = useParams();
   //const {userId } = useParams();
   /*不確定Router*/
-  //const { isAuthenticated } =useAuth ();
+  const { isAuthenticated } = useAuth();
   //const navigate = useNavigate ();
   //useEffect (()=>{
   // if (isAuthenticated){
@@ -24,8 +25,7 @@ const ProfilePage = () => {
   //    navigate('/');
   //  }
   //})
-
-  const { isAuthenticated, user } = useContext(AuthContext);
+  console.log(id)
   const navigate = useNavigate();
   useEffect(() => {
     if (!isAuthenticated) {

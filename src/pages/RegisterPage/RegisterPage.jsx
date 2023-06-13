@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { AuthInput } from '../../components'
 import Swal from 'sweetalert2'
 import { register } from '../../apis/user'
-
+import { useNavigate } from 'react-router-dom'
 const RegisterPage = () => {
   const [account, setAccount] = useState('')
   const [name, setName] = useState('')
@@ -15,7 +15,7 @@ const RegisterPage = () => {
   // 用來接收api
   const [responseError, setResponseError] = useState(false)
   const [errorInfo, setErrorInfo] = useState('')
-
+  const navigate = useNavigate()
 
 
 
@@ -43,6 +43,7 @@ const RegisterPage = () => {
         position: 'top',
       });
       setResponseError(false)
+      navigate('/login')
       return
     } else {
       console.log(errInfo)

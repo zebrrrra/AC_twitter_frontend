@@ -7,48 +7,42 @@ import { ReactComponent as Upload } from "../../assets/icons/camera.svg"
 import { ReactComponent as Fork } from "../../assets/icons/Vector.svg"
 import { putUserProfile } from "../../apis/user"
 
-const EditModal = ({ open, onClose, onChange }) => {
+const EditModal = ({ open, onClose, onChange, payload }) => {
   //  name, introduction, avatar, cover
+  const { name, introduction, avatar, cover } = payload || {};
+  const [editName, setEditName] = useState(name);
+  const [editAvatar, setEditAvatar] = useState(avatar);
+  const [editCover, setEditCover] = useState(cover);
+  const [editIntroduction, setEditIntroduction] = useState(introduction);
 
   //接api的資料
-  const [cover, setCover] = useState(editCover)
-  const [avatar, setAvatar] = useState(editAvatar)
+  // const [name, setName] = useState(payload.name)
+  // const [avatar, setAvatar] = useState(payload.avatar)
 
-  const [name, setName] = useState('')
-  const [introduction, setIntroduction] = useState('')
+  // const [cover, setCover] = useState(payload.cover)
+  // const [introduction, setIntroduction] = useState(payload.introduction)
 
   const handleAvatarUpload = (e) => {
     // 取得使用者上傳的圖
     const data = e.target.files[0];
     if (!data) return;
-    const formData = new FormData();
-    formData.append('avatar', data)
 
-    // console.log(formData.get('avatar'))
-    setAvatar(formData)
+    setEditAvatar(data)
   }
-
   const handleCoverUpload = (e) => {
     const data = e.target.files[0];
     if (!data) return;
-    const formData = new FormData();
-    formData.append('cover', data)
-    setCover(formData)
-
+    setEditCover(data)
   }
 
   // 儲存後發送api
-  const handleProfileSave = async ({ cover, avatar, name, introduction }) => {
+  const handleProfileSave = async () => {
+    const { id } = payload
+    const savePayload = await putUserProfile({ id, name: editName, avatar: editAvatar, cover: editCover, introduction: editIntroduction })
 
-
-    let id = 174
-
-    const payload = await putUserProfile({ id, cover, avatar, name, introduction })
-
-    console.log(payload)
+    console.log(savePayload)
     onClose(false)
   }
-
 
   if (!open) return;
   return (
@@ -64,7 +58,7 @@ const EditModal = ({ open, onClose, onChange }) => {
         {/* <form className={style.uploadFormContainer} action="/api/users/:id/profile" method="POST" encType="multipart/form-data"> */}
 
         <label htmlFor="coverUpload" className={style.bgContainer}>
-          <img src={cover} alt="cover" />
+          <img src={editCover} alt="cover" />
           <Upload className={style.upload} />
           <Fork className={style.fork} />
         </label>
@@ -75,7 +69,7 @@ const EditModal = ({ open, onClose, onChange }) => {
           onChange={handleCoverUpload} />
 
         <label htmlFor="Avatarupload" className={style.avatarContainer}>
-          <img src={avatar} alt="avatar" />
+          <img src={editAvatar} alt="avatar" />
           <Upload className={style.upload} />
         </label>
         <input type="file"
@@ -87,10 +81,11 @@ const EditModal = ({ open, onClose, onChange }) => {
         {/* </form> */}
 
 
-        <div className={style.inputContainer}>
-          <AuthInput value={name} label="名稱" id="username" type="text" placeholder="請輸入使用者名稱" maxLength={50} onChange={(nameValue) => setName(nameValue)} message />
 
-          <AuthInput value={introduction} label="自我介紹" id="introduction" type="text" placeholder="請輸入自我介紹" maxLength={160} onChange={(introductionValue) => setIntroduction(introductionValue)} message height={147} />
+        <div className={style.inputContainer}>
+          <AuthInput value={editName} label="名稱" id="名稱" type="text" placeholder="請輸入使用者名稱" maxLength={50} onChange={(nameValue) => setEditName(nameValue)} message />
+
+          <AuthInput value={editIntroduction} label="自我介紹" id="introduction" type="text" placeholder="請輸入自我介紹" maxLength={160} onChange={(introductionValue) => setEditIntroduction(introductionValue)} message height={147} />
         </div>
       </div>
     </div>
@@ -100,3 +95,4 @@ const EditModal = ({ open, onClose, onChange }) => {
   )
 }
 export default EditModal
+
