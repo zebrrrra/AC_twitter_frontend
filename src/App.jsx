@@ -23,6 +23,7 @@ function App() {
           
             <Route path="/testuser" element={<AdminUserPage />}/>
             <Route path="register" element={<RegisterPage />} />
+            <Route path="/main" element={<HomePage />} />
             <Route path="/:id/*" element={<HandleProfilePage />} />
             <Route path="/tweets/:tweetId" element= {<ReplyPage />}/>
             <Route path="/*" element={<HomePage />} />

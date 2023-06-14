@@ -2,6 +2,7 @@ import { ReactComponent as Avatar } from '../../assets/icon/img.svg'
 import style from './ReplyCard.module.scss';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { useNavigate } from 'react-router-dom';
 
 dayjs.extend(relativeTime);
 dayjs.locale('zh-tw');
@@ -18,6 +19,11 @@ function getTime(createdAt) {
 }
 
 const ReplyCard = ({reply}) => {
+    const navigate = useNavigate();
+    const handleAvatarClick = (userId) => {
+        navigate(`/${userId}`);
+      };
+    
     const {
         User: { name, account,avatar } = {},
         comment,
@@ -27,7 +33,7 @@ const ReplyCard = ({reply}) => {
     return(
         <div className={style.tweetCardContainer}>
                     <div className={style.tweetCard}>
-                    <img src={avatar} className={style.avatar} alt="avatar"/>
+                    <img src={avatar} className={style.avatar} onClick={() => handleAvatarClick(reply.User.id)} alt="avatar"/>
                         <div className={style.contentContainer}>
                             <div className={style.nameAndUserId}>
                                 <span className={style.name}>{name}</span>

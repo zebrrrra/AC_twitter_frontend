@@ -9,6 +9,8 @@ const AllTweets =({ userId })=>{
     const [allTweets, setAllTweets] = useState([]);
     const {likeTweets: updateLikes,handleLike,handleUnLike} =useLike({dataItems:allTweets});
     
+
+    
     useEffect(()=>{
         const fetchTweets = async () => {
             const data = await getAllTweets();

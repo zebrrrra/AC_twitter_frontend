@@ -7,6 +7,7 @@ import replyIcon from '../../assets/icon/reply_1.svg'
 import style from './TweetCard.module.scss';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { useNavigate } from 'react-router-dom';
 
 dayjs.extend(relativeTime);
 dayjs.locale('zh-tw');
@@ -23,7 +24,11 @@ function getTime(createdAt) {
 
 
 const TweetCard = ({ tweet,onLike,onUnLike }) => {
-
+    const navigate = useNavigate();
+    const handleAvatarClick = (userId) => {
+        navigate(`/${userId}`);
+      };
+      
     const handleButtonClick =  () =>{
         console.log('like:',onLike, 'unlike:', onUnLike,'isCurrentUserLiked:', tweet.isCurrentUserLiked);
         if (tweet.isCurrentUserLiked){
@@ -46,7 +51,7 @@ const TweetCard = ({ tweet,onLike,onUnLike }) => {
             <>
                 <div className={style.tweetCardContainer}>
                 <div className={style.tweetCard}>
-                    <img src={avatar} className={style.avatar} alt="avatar"/>
+                    <img src={avatar} className={style.avatar}  onClick={() => handleAvatarClick(tweet.User.id)}alt="avatar"/>
                     <div className={style.contentContainer}>
                         <div className={style.nameAndUserId}>
                             <span className={style.name}>{name}</span>
