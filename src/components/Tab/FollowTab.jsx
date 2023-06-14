@@ -24,20 +24,22 @@ const FollowTab = ({ userId,updateTag }) => {
           const followingData = await getUserFollowings(userId);
           const followerData = await getUserFollowers(userId);
       
-            
-
           if (followingData) {
-            setFollowingUsers(followingData.map(user => ({
+            const newFollowingUsers = followingData.map(user => ({
               ...user.Following,
               isCurrentUserFollowed: user.isCurrentUserFollowed
-            })));
+            }));
+            setFollowingUsers(newFollowingUsers);
+            console.log('followingUsers updated:', newFollowingUsers);
           }
       
           if (followerData) {
-            setFollowerUsers(followerData.map(user => ({
+            const newFollowerUsers = followerData.map(user => ({
               ...user.Follower,
               isCurrentUserFollowed: user.isCurrentUserFollowed
-            })));
+            }));
+            setFollowerUsers(newFollowerUsers);
+            console.log('followerUsers updated:', newFollowerUsers);
           }
         }
       

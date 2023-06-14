@@ -3,7 +3,7 @@ import useFollow from "../../hooks/FollowHook";
 
 const FollowersList = ({users, setUsers})=>{
 const {handleFollow,handleUnFollow}=useFollow(users,setUsers);
-
+console.log('Rendering FollowingList with users:', users);
 
 
     return (

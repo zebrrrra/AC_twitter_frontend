@@ -6,28 +6,40 @@ const [updateFlag, setUpdateFlag] = useState(false);
 
 
 const handleFollow = async (id) => {
-  const response = await postFollowShips(id);
-  if (response && response.status === 'success') {
-    setUpdateFlag(!updateFlag);
-    setUsers((currentUsers) => 
-      currentUsers.map((user) => 
-        user.id === id ? { ...user, isCurrentUserFollowed: true } : user
-      )
-    );
+  try {
+    const response = await postFollowShips(id);
+    if (response && response.status === 'success') {
+      const updatedUser = await getUsers(id);
+      if (updatedUser) {
+        setUsers((currentUsers) => 
+          currentUsers.map((user) => 
+            user.id === id ? { ...user, ...updatedUser } : user
+          )
+        );
+      }
+    }
+  } catch (error) {
+    console.error('Error in handleFollow:', error);
   }
 };
 
-  const handleUnFollow = async (id) => {
+const handleUnFollow = async (id) => {
+  try {
     const response = await deleteFollowShips(id);
     if (response && response.status === 'success') {
-      setUpdateFlag(!updateFlag);
-      setUsers((currentUsers) => 
-        currentUsers.map((user) => 
-          user.id === id ? { ...user, isCurrentUserFollowed: false } : user
-        )
-      );
+      const updatedUser = await getUsers(id);
+      if (updatedUser) {
+        setUsers((currentUsers) => 
+          currentUsers.map((user) => 
+            user.id === id ? { ...user, ...updatedUser } : user
+          )
+        );
+      }
     }
-  };
+  } catch (error) {
+    console.error('Error in handleUnFollow:', error);
+  }
+};
   return { users, handleFollow, handleUnFollow, updateFlag };
 };
 
