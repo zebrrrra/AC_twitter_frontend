@@ -7,5 +7,6 @@ import MainPost from "./MainPost/MainPost";
 import AllTweets from "./AllTweets/AllTweets";
 import RecommendList from "./RecommendList/RecommendList";
 import OtherUserInfo from "./OtherUserInfo/OtherUserInfo";
+import MainTweet from "./MainTweet/MainTweet";
 
-export { AuthInput, UserInfo, TweetModal, Header, Navbars, MainPost, AllTweets, RecommendList, OtherUserInfo }
+export { AuthInput, UserInfo, TweetModal, Header, Navbars, MainPost, AllTweets, RecommendList, OtherUserInfo, MainTweet }
