@@ -11,7 +11,6 @@ import { ReplyMain } from '../../components';
 
 const OtherProfilePage = ({id}) => {
 
-    
   return (
     <div className={style.profileContainer}>
       <div className={style.homeColumn}>
