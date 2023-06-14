@@ -26,7 +26,8 @@ const FollowTab = ({ userId,updateTag }) => {
       
           if (followingData) {
             const newFollowingUsers = followingData.map(user => ({
-              ...user.Following,
+                id: user.followingId,
+                  ...user.Following,
               isCurrentUserFollowed: user.isCurrentUserFollowed
             }));
             setFollowingUsers(newFollowingUsers);
@@ -35,7 +36,8 @@ const FollowTab = ({ userId,updateTag }) => {
       
           if (followerData) {
             const newFollowerUsers = followerData.map(user => ({
-              ...user.Follower,
+            id: user.followerId,
+            ...user.Follower,
               isCurrentUserFollowed: user.isCurrentUserFollowed
             }));
             setFollowerUsers(newFollowerUsers);
