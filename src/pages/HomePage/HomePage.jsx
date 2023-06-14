@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
   const { isAuthenticated,user} = useAuth();
+  
   console.log(user); //測試
   const navigate =useNavigate();
   useEffect(()=>{

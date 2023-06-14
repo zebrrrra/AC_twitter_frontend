@@ -1,12 +1,7 @@
 //import { useParams,Link } from 'react-router-dom'; 
 import style from './Tab.module.scss';
-<<<<<<< HEAD
 import { useState, useEffect} from 'react';
 import {Routes,Route, useNavigate, useLocation} from 'react-router-dom';
-=======
-import { useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
->>>>>>> main
 import TweetList from '../TweetList/TweetList';
 import LikeList from '../LikeList/LikeList';
 import ReplyList from '../ReplyList/ReplyList';
@@ -16,7 +11,6 @@ import ReplyList from '../ReplyList/ReplyList';
 const Tab = ({ userId }) => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState("推文");
-<<<<<<< HEAD
     const location = useLocation();
 
     useEffect(() => {
@@ -37,9 +31,6 @@ const Tab = ({ userId }) => {
         }
     }, [location.pathname]);  
     
-=======
-
->>>>>>> main
     const handleClick = (tabName) => {
         setActiveTab(tabName);
         switch (tabName) {

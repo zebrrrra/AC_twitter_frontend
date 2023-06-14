@@ -50,13 +50,12 @@ export const AuthProvider = ({ children }) => {
                 user: payload && {
                     id: payload.id,
                     name: payload.name,
-<<<<<<< HEAD
                     avatar: payload.avatar,
                     cover: payload.cover,
                 },
                 /*register: async (data) => {
                     const { success, token } = await register(
-=======
+
                 }, responseError, errorInfo, setResponseError, setErrorInfo
                 , register: async (data) => {
                     const result = await register({
@@ -94,8 +93,8 @@ export const AuthProvider = ({ children }) => {
                     // }
                     // console.log(success)
                     // return success
-                }
-                , login: async (data) => {
+                }*/
+                 login: async (data) => {
                     const result = await login(
                         {
                             account: data.account,
