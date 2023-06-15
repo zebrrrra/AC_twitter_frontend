@@ -1,23 +1,18 @@
 
 import style from './FollowCard.module.scss';
 
-
-const FollowCard = ({user,onFollow,onUnfollow}) => {
-    console.log('Rendering FollowCard with user:', user);
-
+const FollowingCard = ({user,onFollow,onUnfollow}) => {
 const buttonClass = user.isCurrentUserFollowed ?style.buttonFollowing: style.buttonFollower;
 const buttonText = user.isCurrentUserFollowed? "正在跟隨":"跟隨";
 
 
-const handleButtonClick=()=>{
+/*const handleButtonClick=()=>{
     if (user.isCurrentUserFollowed){
         onUnfollow(user.id);
     } else{
         onFollow(user.id);
     }
-    console.log('user is:', user);
-
-};
+};*/
     return (
         <div className={style.followCardContainer}>
                  <div className={style.followCard}>  
@@ -25,12 +20,19 @@ const handleButtonClick=()=>{
         <div className={style.userInfo}>
         <div className={style.name}>{user.name}</div>
         <div className={style.intro}>{user.introduction}</div></div>
-        <button className={buttonClass} onClick={handleButtonClick}>{buttonText}</button>
-
+        {user.isCurrentUserFollowed ? (
+          <button className={buttonClass} onClick={() => onUnfollow(user.id)}>
+            {buttonText}
+          </button>
+        ) : (
+          <button className={buttonClass} onClick={() => onFollow(user.id)}>
+            {buttonText}
+          </button>
+             )}
         </div>
         </div> 
     
     )
     
 }
-export default FollowCard;
+export default FollowingCard;

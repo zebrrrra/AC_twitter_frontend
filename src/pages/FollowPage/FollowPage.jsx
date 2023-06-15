@@ -14,7 +14,7 @@ const FollowPage = ()=>{
         navigate ('/login');
       }
       },[navigate,isAuthenticated])
-  
+  console.log('FollowPage測試:',user)
 
     return(
         <div className={style.followContainer}>
@@ -23,7 +23,7 @@ const FollowPage = ()=>{
             <Navbars/>
             </div>
             <div className={style.middleColumn}>
-            <FollowTab userId={user && user.id}/>
+            <FollowTab user={user} userId={user && user.id}/>
             </div>
         <div className={style.rightColumn}>
             <RecommendList/>

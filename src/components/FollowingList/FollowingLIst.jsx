@@ -1,4 +1,4 @@
-import FollowCard from "../FollowCard/FollowCard";
+import FollowingCard from "../FollowCard/FollowingCard";
 import useFollow from "../../hooks/FollowHook";
 
 const FollowingList = ({users, setUsers})=>{
@@ -10,7 +10,7 @@ const FollowingList = ({users, setUsers})=>{
     return (
         <>
         {users&& users.map(user => (
-    <FollowCard
+    <FollowingCard
     key ={user.id}
     user={user}
     onFollow={handleFollow}

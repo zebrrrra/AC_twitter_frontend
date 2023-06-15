@@ -10,44 +10,77 @@ import FollowersList from '../FollowersList/FollowersList';
 import { getUserFollowings,getUserFollowers } from "../../apis/user";
 
 
-const FollowTab = ({ userId,updateTag }) => {
+const FollowTab = ({ user,userId,updateTag }) => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState("正在追隨");
     const location = useLocation();
-    const [users, setUsers] = useState([]);
+  
     const [followingUsers, setFollowingUsers] = useState([]);
     const [followerUsers, setFollowerUsers] = useState([]);
+    const [isCurrentUserFollowed,setIsCurrentUserFollowed]=useState(userId.isCurrentUserFollowed);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(()=>{
+        setIsCurrentUserFollowed(userId.isCurrentUserFollowed);
+    },[userId.isCurrentUserFollowed])
 
 
     useEffect(() => {
         const fetchFollowersAndFollowings = async () => {
           const followingData = await getUserFollowings(userId);
           const followerData = await getUserFollowers(userId);
-      
-          if (followingData) {
-            const newFollowingUsers = followingData.map(user => ({
-                id: user.followingId,
+
+            setIsLoading(true)
+           
+            /*if (followerData && followingData) {
+                const newFollowerUsers = followerData.map (user=>({
+                    id:user.followerId,
+                    ...user.follower,
+                    isCurrentUserFollowed: user.Follower.isCurrentUserFollowed
+                }));
+                setFollowerUsers(newFollowerUsers);
+                const newFollowingUsers = followingData.map (user=>({
+                    id: user.followingId,
+                    ...user.Following,
+                    isCurrentUserFollowed: user.Following.isCurrentUserFollowed
+                }))
+                setFollowingUsers(newFollowingUsers);
+                setIsLoading(false);
+            }
+            }
+            fetchFollowersAndFollowings();
+        },[userId,updateTag]);*/
+
+
+              if (followerData) {
+                const newFollowerUsers = followerData.map(user => {
+                  console.log('user.Follower.isCurrentUserFollowed:', user.Follower.isCurrentUserFollowed);
+                  return {
+                    id: user.followerId,
+                    ...user.Follower,
+                    isCurrentUserFollowed: user.Follower.isCurrentUserFollowed 
+                  }
+                });
+                setFollowerUsers(newFollowerUsers);
+              }
+              setIsLoading(false)
+              console.log('fetch的followingList資料:',followerData)
+
+              if (followingData) {
+                const newFollowingUsers = followingData.map(user => ({
+                  id: user.followingId,
                   ...user.Following,
-              isCurrentUserFollowed: user.isCurrentUserFollowed
-            }));
-            setFollowingUsers(newFollowingUsers);
-            console.log('followingUsers updated:', newFollowingUsers);
+                  isCurrentUserFollowed: user.Following.isCurrentUserFollowed 
+                }));
+                setFollowingUsers(newFollowingUsers);
+              }
+              console.log('fetch的followList資料:',followingData)
           }
-      
-          if (followerData) {
-            const newFollowerUsers = followerData.map(user => ({
-            id: user.followerId,
-            ...user.Follower,
-              isCurrentUserFollowed: user.isCurrentUserFollowed
-            }));
-            setFollowerUsers(newFollowerUsers);
-            console.log('followerUsers updated:', newFollowerUsers);
-          }
-        }
-      
-        fetchFollowersAndFollowings();
-      }, [userId, updateTag]);
-      
+            
+            fetchFollowersAndFollowings();
+          }, [userId, updateTag]);
+
+
     useEffect(() => {
         const currentPath = location.pathname.split('/').pop();
         switch (currentPath) {
@@ -95,11 +128,15 @@ const FollowTab = ({ userId,updateTag }) => {
                 </div>
                   
             </div>
+            {isLoading ? (
+            <p>Loading...</p>
+        ) : (
             <Routes>
-                <Route path="followings" element={<FollowingList userId={userId} users={followingUsers}setUsers={setFollowingUsers} />} />
-                <Route path="followers" element={<FollowersList userId={userId} users={followerUsers}setUsers={setFollowerUsers}/>} />
-                <Route path="*" element={<FollowingList userId={userId} setUsers={setUsers}/>} /> 
+                <Route path="followings" element={<FollowingList userId={userId} users={followingUsers}setUsers={setFollowingUsers}/>} />
+                <Route path="followers" element={<FollowersList userId={userId}  users={followerUsers}setUsers={setFollowerUsers}/>} />
+                <Route path="*" element={<FollowingList userId={userId} />} /> 
             </Routes>
+        )}
         </div>
     );
 }

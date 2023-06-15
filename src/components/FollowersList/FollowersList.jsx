@@ -1,15 +1,15 @@
-import FollowCard from "../FollowCard/FollowCard";
+import FollowerCard from "../FollowCard/FollowerCard";
 import useFollow from "../../hooks/FollowHook";
 
 const FollowersList = ({users, setUsers})=>{
 const {handleFollow,handleUnFollow}=useFollow(users,setUsers);
-console.log('Rendering FollowingList with users:', users);
+console.log('Rendering FollowerList with users:', users);
 
 
     return (
         <>
         {users&&users.map(user => (
-    <FollowCard
+    <FollowerCard
     key ={user.id}
     user={user}
     onFollow={handleFollow}
