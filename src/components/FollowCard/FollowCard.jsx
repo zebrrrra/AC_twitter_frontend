@@ -1,7 +1,7 @@
 
 import style from './FollowCard.module.scss';
 
-const FollowerCard = ({user,onFollow,onUnfollow}) => {
+const FollowCard = ({user,onFollow,onUnfollow}) => {
 const buttonClass = user.isCurrentUserFollowed ?style.buttonFollowing: style.buttonFollower;
 const buttonText = user.isCurrentUserFollowed? "正在跟隨":"跟隨";
 
@@ -35,4 +35,4 @@ const buttonText = user.isCurrentUserFollowed? "正在跟隨":"跟隨";
     )
     
 }
-export default FollowerCard;
+export default FollowCard;

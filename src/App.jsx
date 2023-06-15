@@ -20,8 +20,9 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/admin" element={<AdminLoginPage />} />
             <Route path="register" element={<RegisterPage />} />
-            <Route path="/:id/*" element={<HandleProfilePage />} />
             <Route path="/tweets/:tweetId" element= {<ReplyPage />}/>
+            <Route path="/:id/*" element={<HandleProfilePage />} />
+            <Route path="/:id/follow/*" element={<HandleProfilePage />} />
             <Route path="/*" element={<HomePage />} />
 
 
