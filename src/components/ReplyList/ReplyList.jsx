@@ -5,16 +5,16 @@ import { getATweetReply } from '../../apis/tweet';
 
 //假設有Authcontext(還沒寫)
 
-const ReplyList = ({ userId,tweetId }) => {
+const ReplyList = ({ userId, tweetId }) => {
     const [replies, setReplies] = useState([]);
     console.log(userId);
     useEffect(() => {
         const fetchReplies = async () => {
-            let data ='';
-            if (userId){
+            let data = '';
+            if (userId) {
                 data = await getUserRepliedTweets(userId);
             }
-            else if (tweetId){
+            else if (tweetId) {
                 data = await getATweetReply(tweetId);
             }
             console.log(data); // 測試
@@ -23,6 +23,8 @@ const ReplyList = ({ userId,tweetId }) => {
             }
         }
         fetchReplies();
-    }, [userId,tweetId]);
+    }, [userId, tweetId]);
 
     return replies.map(reply => <ReplyCard key={reply.id} reply={reply} type="reply" />);
+}
+export default ReplyList
