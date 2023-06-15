@@ -8,16 +8,14 @@ const AuthInput = ({ label, id, type, placeholder, value, maxLength, onChange, h
   //這兩個變數為監控onChange 
   const [error, setError] = useState(false)
   const [message, setMessage] = useState('')
-  console.log(responseError)
-  console.log(errorInfo)
 
   // 檢測後端錯誤以及是否為錯誤對應欄位
-  let DisplayError = responseError && errorInfo.includes(id);
-  let AccountError = errorInfo && errorInfo.includes('不存在') && id === 'account';
+  const DisplayError = responseError && errorInfo.includes(id);
+  const AccountError = errorInfo && errorInfo.includes('不存在') && id === '帳號';
 
 
-  console.log(DisplayError)//當錯時，都是false
-  console.log(AccountError)//當錯時，true/false
+  // console.log(DisplayError)//當錯時，都是false
+  // console.log(AccountError)//當錯時，true/false
   const number = (value || '').length
   const containerStyle = {
     height: `${height}px`,

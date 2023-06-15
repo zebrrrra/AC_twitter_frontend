@@ -15,7 +15,7 @@ const LoginPage = () => {
 
   const navigate = useNavigate()
   const authInputCollection = [
-    { label: '帳號', id: 'account', type: 'text', placeholder: '請輸入帳號', value: account, onChange: (accountValue) => setAccount(accountValue) },
+    { label: '帳號', id: '帳號', type: 'text', placeholder: '請輸入帳號', value: account, onChange: (accountValue) => setAccount(accountValue) },
     { label: '密碼', id: '密碼', type: 'password', placeholder: '請輸入密碼', value: password, onChange: (passwordValue) => setPassword(passwordValue) }]
 
 
@@ -62,15 +62,7 @@ const LoginPage = () => {
     }
     return
   }
-  // Swal.fire({
-  //   title: '登入失敗',
-  //   icon: 'error',
-  //   showConfirmButton: false,
-  //   timer: 1000,
-  //   position: 'top',
-  // });
-  // setResponseError(true)
-  // return
+
   useEffect(() => {
     if (isAuthenticated) {
       navigate(`/${user?.id}/`);
