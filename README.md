@@ -1,5 +1,6 @@
 # AC Twitter 專案  
 此為ALPHA CAMP 小組協作畢業專案，本組採前後分離，由2位前端、2位後端開發。
+- 補充：此專案後續不再維護更新，若欲查看更新版可至[twitter_challenge](https://github.com/zebrrrra/twitter_challenge)
 
 ## 預覽
 ![image](https://github.com/zebrrrra/AC_twitter_frontend/assets/123958778/c1aede27-7451-42e3-95c5-771b7732e90f)
